@@ -140,7 +140,7 @@ The Eye Contact client supports extensive parameter customization for fine-tunin
    python eye-contact.py --target 127.0.0.1:8001 --lossless
    ```
 
-- `bitrate`: Sets the target bitrate for video encoding in bits per second (bps). Higher bitrates result in better video quality but larger file sizes. This parameter allows balancing quality and file size by controlling the video bitrate. The default is 3,000,000 bps (3 Mbps). For example, setting `--bitrate 5000000` targets 5 Mbps encoding.
+- `bitrate`: Sets the target bitrate for video encoding in bits per second (bps). Higher bitrates result in better video quality but larger file sizes. This parameter allows balancing quality and file size by controlling the video bitrate. The default is 20,000,000 bps (20 Mbps). For example, setting `--bitrate 5000000` targets 5 Mbps encoding.
    ```bash
    python eye-contact.py --target 127.0.0.1:8001 --bitrate 5000000
    ```
@@ -174,9 +174,9 @@ The Eye Contact client supports extensive parameter customization for fine-tunin
 
 **Head Pose Threshold Parameters**
 -  `--head-pitch-threshold-low` Head pose pitch threshold (degrees) at which the redirection starts transitioning away from camera toward estimated gaze (default: 15.0, range: [10, 35]).
--  `--head-pitch-threshold-high` Head pose pitch threshold (degrees) at which the redirection is equal to estimated gaze (default: 15.0, range: [10, 35]).
--  `--head-yaw-threshold-low` Head pose yaw threshold (degrees) at which the redirection starts transitioning (default: 15.0, range: [10, 35]).
--  `--head-yaw-threshold-high` Head pose yaw threshold (degrees) at which the redirection is equal to estimated gaze (default: 15.0, range: [10, 35]).
+-  `--head-pitch-threshold-high` Head pose pitch threshold (degrees) at which the redirection is equal to estimated gaze (default: 25.0, range: [10, 35]).
+-  `--head-yaw-threshold-low` Head pose yaw threshold (degrees) at which the redirection starts transitioning (default: 25.0, range: [10, 35]).
+-  `--head-yaw-threshold-high` Head pose yaw threshold (degrees) at which the redirection is equal to estimated gaze (default: 30.0, range: [10, 35]).
 
 #### Important Notes about Streaming Mode
 
