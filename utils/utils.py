@@ -1,4 +1,5 @@
-# Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-FileCopyrightText: Copyright (c) 2025-206 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -188,6 +189,24 @@ def roi_csv_reader(reader: csv.reader, row_count: int) -> Iterator[list]:
         if not rows:
             break
         yield rows
+
+
+def read_file_chunks(filepath: str, chunk_size: int) -> Iterator[bytes]:
+    """Yield successive byte chunks from a file.
+
+    Args:
+        filepath: Path to the file to read.
+        chunk_size: Number of bytes per chunk.
+
+    Yields:
+        Byte chunks until EOF.
+    """
+    with open(filepath, "rb") as f:
+        while True:
+            chunk = f.read(chunk_size)
+            if not chunk:
+                break
+            yield chunk
 
 
 def check_streamable(file_path: os.PathLike) -> bool:

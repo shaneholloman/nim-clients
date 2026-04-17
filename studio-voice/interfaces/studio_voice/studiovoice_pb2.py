@@ -24,17 +24,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11studiovoice.proto\x12\x1cnvidia.maxine.studiovoice.v1\"B\n\x13\x45nhanceAudioRequest\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x42\x0e\n\x0cstream_input\"D\n\x14\x45nhanceAudioResponse\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x42\x0f\n\rstream_output2\x90\x01\n\x11MaxineStudioVoice\x12{\n\x0c\x45nhanceAudio\x12\x31.nvidia.maxine.studiovoice.v1.EnhanceAudioRequest\x1a\x32.nvidia.maxine.studiovoice.v1.EnhanceAudioResponse\"\x00(\x01\x30\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11studiovoice.proto\x12\x1anvidia.ai4m.studiovoice.v1\"B\n\x13\x45nhanceAudioRequest\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x42\x0e\n\x0cstream_input\"D\n\x14\x45nhanceAudioResponse\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x42\x0f\n\rstream_output2\x86\x01\n\x0bStudioVoice\x12w\n\x0c\x45nhanceAudio\x12/.nvidia.ai4m.studiovoice.v1.EnhanceAudioRequest\x1a\x30.nvidia.ai4m.studiovoice.v1.EnhanceAudioResponse\"\x00(\x01\x30\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'studiovoice_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_ENHANCEAUDIOREQUEST']._serialized_start=51
-  _globals['_ENHANCEAUDIOREQUEST']._serialized_end=117
-  _globals['_ENHANCEAUDIORESPONSE']._serialized_start=119
-  _globals['_ENHANCEAUDIORESPONSE']._serialized_end=187
-  _globals['_MAXINESTUDIOVOICE']._serialized_start=190
-  _globals['_MAXINESTUDIOVOICE']._serialized_end=334
+  _globals['_ENHANCEAUDIOREQUEST']._serialized_start=49
+  _globals['_ENHANCEAUDIOREQUEST']._serialized_end=115
+  _globals['_ENHANCEAUDIORESPONSE']._serialized_start=117
+  _globals['_ENHANCEAUDIORESPONSE']._serialized_end=185
+  _globals['_STUDIOVOICE']._serialized_start=188
+  _globals['_STUDIOVOICE']._serialized_end=322
 # @@protoc_insertion_point(module_scope)

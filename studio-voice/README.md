@@ -45,8 +45,8 @@ The grpcio version needed for compilation can be referred at requirements.txt
 
 To compile protos on Linux, run:
 ```bash
-// Go to studio-voice/protos folder
-cd studio-voice/protos
+// Go to studio-voice/protos/linux folder
+cd studio-voice/protos/linux
 
 chmod +x compile_protos.sh
 ./compile_protos.sh
@@ -54,8 +54,8 @@ chmod +x compile_protos.sh
 
 To compile protos on Windows, run:
 ```bash
-// Go to studio-voice/protos folder
-cd studio-voice/protos
+// Go to studio-voice/protos/windows folder
+cd studio-voice/protos\windows
 
 compile_protos.bat
 ```
@@ -68,6 +68,16 @@ Go to the scripts directory.
 cd scripts
 ```
 
+#### Usage for Streaming NIM Request (Recommended)
+
+Streaming mode provides lower latency than transactional mode because it processes audio chunk-by-chunk without file I/O overhead. To run the client in streaming mode, add `--streaming`. The following example command processes the packaged sample audio file in streaming mode and generates a `studio_voice_48k_output.wav` file in the current folder.
+
+```bash
+python studio_voice.py --target 127.0.0.1:8001 --input ../assets/studio_voice_48k_input.wav --output studio_voice_48k_output.wav --streaming --model-type 48k-ll
+```
+
+> **Note**: When using `--streaming` mode, ensure the selected `--model-type` (`48k-hq`, `48k-ll`, or `16k-hq`) aligns with the `NIM_MODEL_PROFILE` Model Type configuration to maintain compatibility.
+
 #### Usage for Transactional NIM Request
 
 To run client in transactional mode. Set `--model-type` in accordance with the server, default is set to `48k-hq`. The following example command processes the packaged sample audio file in transactional mode and generates a `studio_voice_48k_output.wav` file in the current folder.
@@ -76,13 +86,7 @@ To run client in transactional mode. Set `--model-type` in accordance with the s
 python studio_voice.py --target 127.0.0.1:8001 --input ../assets/studio_voice_48k_input.wav --output studio_voice_48k_output.wav --model-type 48k-hq
 ```
 
-#### Usage for Streaming NIM Request
-
-To run the client in streaming mode, add `--streaming`. The following example command processes the packaged sample audio file in streaming mode and generates a `studio_voice_48k_output.wav` file in the current folder.
-
-```bash
-python studio_voice.py --target 127.0.0.1:8001 --input ../assets/studio_voice_48k_input.wav --output studio_voice_48k_output.wav --streaming --model-type 48k-ll
-```
+> **Note**: To use the client in Streaming mode, launch the NIM with `STREAMING=true`. Similarly, to use the client in Transactional mode, launch the NIM with `STREAMING=false`. The client mode must match the server mode.
 
 Only WAV files are supported.
 
@@ -112,5 +116,7 @@ python studio_voice.py --preview-mode \
 - `--output`        - The path for the output audio file. Default is current directory (scripts) with name `studio_voice_48k_output.wav`.
 - `--streaming`     - Flag to control if streaming mode should be used. Transactional mode will be used by default.
 - `--model-type`    - Studio Voice model type hosted on server. It can be set to `48k-hq/48k-ll/16k-hq`. Default value is `48k-hq`.
+
+> **Note**: **For a step-by-step walkthrough of all the configuration options described above, see the provided Jupyter notebook at [`notebook/studio_voice_notebook.ipynb`](notebook/studio_voice_notebook.ipynb).**
 
 Refer the [docs](https://docs.nvidia.com/nim/maxine/studio-voice/latest/index.html) for more information.

@@ -25,9 +25,9 @@ if _version_not_supported:
     )
 
 
-class MaxineStudioVoiceStub(object):
-    """The MaxineStudioVoice service provides APIs to run the
-    Maxine Studio Voice NIM.
+class StudioVoiceStub(object):
+    """The StudioVoice service provides APIs to run the
+    Studio Voice NIM.
     """
 
     def __init__(self, channel):
@@ -37,32 +37,34 @@ class MaxineStudioVoiceStub(object):
             channel: A grpc.Channel.
         """
         self.EnhanceAudio = channel.stream_stream(
-                '/nvidia.maxine.studiovoice.v1.MaxineStudioVoice/EnhanceAudio',
+                '/nvidia.ai4m.studiovoice.v1.StudioVoice/EnhanceAudio',
                 request_serializer=studiovoice__pb2.EnhanceAudioRequest.SerializeToString,
                 response_deserializer=studiovoice__pb2.EnhanceAudioResponse.FromString,
                 _registered_method=True)
 
 
-class MaxineStudioVoiceServicer(object):
-    """The MaxineStudioVoice service provides APIs to run the
-    Maxine Studio Voice NIM.
+class StudioVoiceServicer(object):
+    """The StudioVoice service provides APIs to run the
+    Studio Voice NIM.
     """
 
     def EnhanceAudio(self, request_iterator, context):
         """EnhanceAudio is a bidirectional streaming RPC to run the
-        Maxine Studio Voice NIM on audio files.
+        Studio Voice NIM on audio files.
         
-        The client streams the input audio file in chunks in the input message and 
-        receives the output audio file in chunks in the output message.
+        The client streams the input audio file in chunks in
+        the input message and receives the output audio file
+        in chunks in the output message.
         
-        The client should only pass one audio file per RPC invocation.
+        The client should only pass one audio file per RPC
+        invocation.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_MaxineStudioVoiceServicer_to_server(servicer, server):
+def add_StudioVoiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'EnhanceAudio': grpc.stream_stream_rpc_method_handler(
                     servicer.EnhanceAudio,
@@ -71,15 +73,15 @@ def add_MaxineStudioVoiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'nvidia.maxine.studiovoice.v1.MaxineStudioVoice', rpc_method_handlers)
+            'nvidia.ai4m.studiovoice.v1.StudioVoice', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('nvidia.maxine.studiovoice.v1.MaxineStudioVoice', rpc_method_handlers)
+    server.add_registered_method_handlers('nvidia.ai4m.studiovoice.v1.StudioVoice', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class MaxineStudioVoice(object):
-    """The MaxineStudioVoice service provides APIs to run the
-    Maxine Studio Voice NIM.
+class StudioVoice(object):
+    """The StudioVoice service provides APIs to run the
+    Studio Voice NIM.
     """
 
     @staticmethod
@@ -96,7 +98,7 @@ class MaxineStudioVoice(object):
         return grpc.experimental.stream_stream(
             request_iterator,
             target,
-            '/nvidia.maxine.studiovoice.v1.MaxineStudioVoice/EnhanceAudio',
+            '/nvidia.ai4m.studiovoice.v1.StudioVoice/EnhanceAudio',
             studiovoice__pb2.EnhanceAudioRequest.SerializeToString,
             studiovoice__pb2.EnhanceAudioResponse.FromString,
             options,

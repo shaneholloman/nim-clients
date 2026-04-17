@@ -1,4 +1,5 @@
-# Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -28,7 +29,7 @@ import numpy as np
 from typing import Iterator
 
 sys.path.append(os.path.join(os.getcwd(), "../interfaces/studio_voice"))
-# Importing gRPC compiler auto-generated maxine studiovoice library
+# Importing gRPC compiler auto-generated studiovoice library
 import studiovoice_pb2  # noqa: E402
 import studiovoice_pb2_grpc  # noqa: E402
 
@@ -69,8 +70,9 @@ def generate_request_for_inference(
         samples_per_ms = sample_rate // 1000
         input_float_size = int(input_size_in_ms * samples_per_ms)
 
-        pad_length = input_float_size - len(input_audio) % input_float_size
-        input_audio = np.pad(input_audio, (0, pad_length), "constant")
+        pad_length = (input_float_size - len(input_audio) % input_float_size) % input_float_size
+        if pad_length > 0:
+            input_audio = np.pad(input_audio, (0, pad_length), "constant")
 
         print(
             f"Len {len(input_audio)}, chunk_size {input_float_size}, audio {input_audio}, "
@@ -224,7 +226,7 @@ def process_request(
       request_metadata: Credentials to process request
     """
     try:
-        stub = studiovoice_pb2_grpc.MaxineStudioVoiceStub(channel)
+        stub = studiovoice_pb2_grpc.StudioVoiceStub(channel)
         start_time = time.time()
 
         responses = stub.EnhanceAudio(
