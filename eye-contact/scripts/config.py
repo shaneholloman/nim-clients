@@ -1,4 +1,5 @@
-# Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -36,7 +37,6 @@ sys.path.append(os.path.join(SCRIPT_PATH, "../interfaces"))
 
 # Local imports
 from constants import (  # noqa: E402
-    DEFAULT_BITRATE,
     DEFAULT_IDR_INTERVAL,
     DEFAULT_NON_STREAMABLE_VIDEO_PATH,
     DEFAULT_STREAMABLE_VIDEO_PATH,
@@ -120,9 +120,10 @@ def create_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--bitrate",
         type=int,
-        default=DEFAULT_BITRATE,
-        help=f"Output video bitrate in bps (default: {DEFAULT_BITRATE}). "
-        f"This is only applicable when lossless mode is disabled.",
+        default=None,
+        help="Output video bitrate in bps. When not specified, the server "
+        "auto-selects bitrate based on input video resolution. "
+        "Only applicable when lossless mode is disabled.",
     )
     parser.add_argument(
         "--idr-interval",
@@ -309,7 +310,7 @@ class EyeContactConfig:
     output_filepath: os.PathLike
     streaming: bool
     lossless: bool
-    bitrate: int
+    bitrate: int | None
     idr_interval: int
     custom_encoding_params: dict | None
     temporal: int
@@ -394,9 +395,8 @@ class EyeContactConfig:
         elif self.custom_encoding_params:
             output += f"Encoding    : Custom parameters: " f"{self.custom_encoding_params}\n"
         else:
-            output += (
-                f"Bitrate     : {self.bitrate:,} bps\n" + f"IDR interval: {self.idr_interval}\n"
-            )
+            bitrate_str = f"{self.bitrate:,} bps" if self.bitrate is not None else "auto (server)"
+            output += f"Bitrate     : {bitrate_str}\n" + f"IDR interval: {self.idr_interval}\n"
         output += (
             f"Output file : {self.output_filepath}\n"
             + f"Streaming   : {self.streaming}\n"
@@ -515,11 +515,11 @@ class EyeContactConfig:
                 custom_encoding=custom_params_proto
             )
         else:
-            # Use default lossy encoding
+            lossy_kwargs = {"idr_interval": self.idr_interval}
+            if self.bitrate is not None:
+                lossy_kwargs["bitrate"] = self.bitrate
             params["output_video_encoding"] = eyecontact_pb2.OutputVideoEncoding(
-                lossy=eyecontact_pb2.LossyEncoding(
-                    bitrate=self.bitrate, idr_interval=self.idr_interval
-                )
+                lossy=eyecontact_pb2.LossyEncoding(**lossy_kwargs)
             )
 
         return params

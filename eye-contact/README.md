@@ -140,7 +140,7 @@ The Eye Contact client supports extensive parameter customization for fine-tunin
    python eye-contact.py --target 127.0.0.1:8001 --lossless
    ```
 
-- `bitrate`: Sets the target bitrate for video encoding in bits per second (bps). Higher bitrates result in better video quality but larger file sizes. This parameter allows balancing quality and file size by controlling the video bitrate. The default is 20,000,000 bps (20 Mbps). For example, setting `--bitrate 5000000` targets 5 Mbps encoding.
+- `bitrate`: Sets the target bitrate for video encoding in bits per second (bps). Higher bitrates result in better video quality but larger file sizes. This parameter allows balancing quality and file size by controlling the video bitrate. For example, setting `--bitrate 5000000` targets 5 Mbps encoding. The default value is decided by the server based on input resolution.
    ```bash
    python eye-contact.py --target 127.0.0.1:8001 --bitrate 5000000
    ```
