@@ -1,4 +1,5 @@
-# Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -29,7 +30,7 @@ from tqdm import tqdm
 from typing import Iterator, Optional
 
 sys.path.append(os.path.join(os.getcwd(), "../interfaces/bnr"))
-# Importing gRPC compiler auto-generated maxine bnr library
+# Importing gRPC compiler auto-generated bnr library
 import bnr_pb2  # noqa: E402
 import bnr_pb2_grpc  # noqa: E402
 
@@ -64,10 +65,10 @@ def generate_request_for_inference(
       input_filepath: Path to input file
       sample_rate: Input audio sample rate
       streaming: Enables grpc streaming mode
-      intensity_ratio: Controls denoising intensity (0.0 to 1.0), only works with v1 models
+      intensity_ratio: Controls denoising intensity (0.0 to 1.0)
       progress_bar: (Optional) Progress bar instance (streaming mode only)
     """
-    # First send the config if intensity_ratio is specified for v1 models
+    # First send the config if intensity_ratio is specified
     if intensity_ratio is not None:
         config_request = bnr_pb2.EnhanceAudioRequest(
             config=bnr_pb2.EnhanceAudioConfig(intensity_ratio=intensity_ratio)
@@ -221,8 +222,9 @@ def parse_args() -> None:
     )
     parser.add_argument(
         "--streaming",
-        action="store_true",
-        help="Flag to enable grpc streaming mode. ",
+        type=lambda v: v.lower() == "true",
+        default=True,
+        help="Streaming mode is enabled by default. Set --streaming False to enable transactional mode.",
     )
     parser.add_argument(
         "--sample-rate",
@@ -273,7 +275,7 @@ def process_request(
       intensity_ratio: Controls denoising intensity (0.0 to 1.0)
     """
     try:
-        stub = bnr_pb2_grpc.MaxineBNRStub(channel)
+        stub = bnr_pb2_grpc.BNRStub(channel)
         start_time = time.time()
 
         progress_bar = None
@@ -319,7 +321,7 @@ def main():
     """
     args = parse_args()
     streaming = args.streaming
-    print(f"Streaming mode set to {streaming}")
+    print(f"Mode: {'Streaming' if streaming else 'Transactional'}")
     sample_rate = CONST_SAMPLE_48KHZ
     if args.sample_rate == CONST_SAMPLE_16KHZ:
         sample_rate = CONST_SAMPLE_16KHZ

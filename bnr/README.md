@@ -4,7 +4,7 @@ This package has a sample client which demonstrates interaction with a BNR NIM.
 
 ## Getting Started
 
-NVIDIA Maxine NIM Client packages use gRPC APIs. Instructions below demonstrate usage of BNR NIM using Python gRPC client.
+NVIDIA NIM Client packages use gRPC APIs. Instructions below demonstrate usage of BNR NIM using Python gRPC client.
 Additionally, access the [Try API](https://build.nvidia.com/nvidia/bnr/api) feature to experience the NVIDIA BNR NIM API without hosting your own servers, as it leverages the NVIDIA Cloud Functions backend.
 
 ## Pre-requisites
@@ -68,20 +68,20 @@ Go to the scripts directory.
 cd scripts
 ```
 
-#### Usage for Transactional NIM Request
+#### Usage for Streaming NIM Request (recommended)
 
-To run client in transactional mode. Set `--sample-rate` in accordance with the server, default is set to `48000`. The following example command processes the packaged sample audio file in transactional mode and generates a `bnr_48k_output.wav` file in the current folder.
+The client runs in streaming mode by default. Set `--sample-rate` in accordance with the server, default is set to `48000`. The following example command processes the packaged sample audio file in streaming mode and generates a `bnr_48k_output.wav` file in the current folder.
 
 ```bash
 python bnr.py --target 127.0.0.1:8001 --input ../assets/bnr_48k_input.wav --output bnr_48k_output.wav --sample-rate 48000
 ```
 
-#### Usage for Streaming NIM Request
+#### Usage for Transactional NIM Request
 
-To run the client in streaming mode, add `--streaming`. The following example command processes the packaged sample audio file in streaming mode and generates a `bnr_48k_output.wav` file in the current folder.
+To run the client in transactional mode, set `--streaming False`. The following example command processes the packaged sample audio file in transactional mode and generates a `bnr_48k_output.wav` file in the current folder.
 
 ```bash
-python bnr.py --target 127.0.0.1:8001 --input ../assets/bnr_48k_input.wav --output bnr_48k_output.wav --streaming --sample-rate 48000
+python bnr.py --target 127.0.0.1:8001 --input ../assets/bnr_48k_input.wav --output bnr_48k_output.wav --streaming False --sample-rate 48000
 ```
 
 Only WAV files are supported.
@@ -110,8 +110,10 @@ python bnr.py --preview-mode \
 - `--function-id`   - NVCF function ID for the service, utilized when using `TRY API` ignored otherwise.
 - `--input`         - The path to the input audio file. Default value is `../assets/bnr_48k_input.wav`.
 - `--output`        - The path for the output audio file. Default is current directory (scripts) with name `bnr_48k_output.wav`.
-- `--streaming`     - Flag to control if streaming mode should be used. Transactional mode will be used by default.
+- `--streaming`     - Flag to control if streaming or transactional mode should be used. Streaming mode will be used by default, set to False to enable transactional mode.
 - `--sample-rate`    - Sample rate of input audio file in Hz (`16000`, `48000`), default is `48000`.
 - `--intensity-ratio` - Intensity ratio value between 0 and 1 to control denoising intensity. Default is 1.0 (maximum denoising).
+
+> **Note**: **For a step-by-step walkthrough of all the configuration options described above, see the provided Jupyter notebook at [`notebook/bnr_notebook.ipynb`](notebook/bnr_notebook.ipynb).**
 
 Refer the [docs](https://docs.nvidia.com/nim/maxine/bnr/latest/index.html) for more information.

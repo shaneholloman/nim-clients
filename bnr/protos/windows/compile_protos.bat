@@ -20,7 +20,7 @@
 
 
 :: This script compiles Protocol Buffer (protobuf) definitions for NVIDIA
-:: Maxine Studio Voice on a Windows Client.
+:: BNR on a Windows Client.
 ::
 :: Execute the script using `compile_protos.bat`.
 ::
@@ -31,7 +31,7 @@ setlocal
 
 :: Define the script directory and other variables
 set "SCRIPT_DIR=%~dp0"
-set "PROTOS_DIR=%SCRIPT_DIR%proto\nvidia\maxine\bnr\v1"
+set "PROTOS_DIR=%SCRIPT_DIR%proto\nvidia\ai4m\bnr\v1"
 set "OUT_DIR=%SCRIPT_DIR%..\interfaces\bnr"
 
 :: Run the grpc_tools.protoc command with the necessary parameters

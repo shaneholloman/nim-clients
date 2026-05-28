@@ -1,4 +1,6 @@
-// Copyright (c) 2024-2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION &
+// AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: MIT
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -20,15 +22,15 @@
 
 syntax = "proto3";
 
-package nvidia.maxine.bnr.v1;
+package nvidia.ai4m.bnr.v1;
 
-// The MaxineBNR service provides APIs to run the
-// Maxine BNR NIM.
-service MaxineBNR {
+// The BNR service provides APIs to run the
+// BNR NIM.
+service BNR {
     // EnhanceAudio is a bidirectional streaming RPC to run the
-    // Maxine BNR NIM on audio files.
+    // BNR NIM on audio files.
     //
-    // The client streams the input audio file in chunks in the input message and 
+    // The client streams the input audio file in chunks in the input message and
     // receives the output audio file in chunks in the output message.
     //
     // The client should only pass one audio file per RPC invocation.
@@ -37,14 +39,14 @@ service MaxineBNR {
 
 // Configuration for EnhanceAudio API.
 message EnhanceAudioConfig {
-    // Intensity ratio between 0.0f to 1.0f. 
+    // Intensity ratio between 0.0f to 1.0f.
     // Default: 1.0
     optional float intensity_ratio = 1;
 }
 
 // Input message for EnhanceAudio RPC.
 message EnhanceAudioRequest {
-    oneof stream_input {    
+    oneof stream_input {
         // Contains a chunk of input audio file data.
         // 32 bit float audio samples
         bytes audio_stream_data = 1;

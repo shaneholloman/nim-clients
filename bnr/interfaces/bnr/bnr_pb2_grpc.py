@@ -25,9 +25,9 @@ if _version_not_supported:
     )
 
 
-class MaxineBNRStub(object):
-    """The MaxineBNR service provides APIs to run the
-    Maxine BNR NIM.
+class BNRStub(object):
+    """The BNR service provides APIs to run the
+    BNR NIM.
     """
 
     def __init__(self, channel):
@@ -37,20 +37,20 @@ class MaxineBNRStub(object):
             channel: A grpc.Channel.
         """
         self.EnhanceAudio = channel.stream_stream(
-                '/nvidia.maxine.bnr.v1.MaxineBNR/EnhanceAudio',
+                '/nvidia.ai4m.bnr.v1.BNR/EnhanceAudio',
                 request_serializer=bnr__pb2.EnhanceAudioRequest.SerializeToString,
                 response_deserializer=bnr__pb2.EnhanceAudioResponse.FromString,
                 _registered_method=True)
 
 
-class MaxineBNRServicer(object):
-    """The MaxineBNR service provides APIs to run the
-    Maxine BNR NIM.
+class BNRServicer(object):
+    """The BNR service provides APIs to run the
+    BNR NIM.
     """
 
     def EnhanceAudio(self, request_iterator, context):
         """EnhanceAudio is a bidirectional streaming RPC to run the
-        Maxine BNR NIM on audio files.
+        BNR NIM on audio files.
         
         The client streams the input audio file in chunks in the input message and 
         receives the output audio file in chunks in the output message.
@@ -62,7 +62,7 @@ class MaxineBNRServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_MaxineBNRServicer_to_server(servicer, server):
+def add_BNRServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'EnhanceAudio': grpc.stream_stream_rpc_method_handler(
                     servicer.EnhanceAudio,
@@ -71,15 +71,15 @@ def add_MaxineBNRServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'nvidia.maxine.bnr.v1.MaxineBNR', rpc_method_handlers)
+            'nvidia.ai4m.bnr.v1.BNR', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('nvidia.maxine.bnr.v1.MaxineBNR', rpc_method_handlers)
+    server.add_registered_method_handlers('nvidia.ai4m.bnr.v1.BNR', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class MaxineBNR(object):
-    """The MaxineBNR service provides APIs to run the
-    Maxine BNR NIM.
+class BNR(object):
+    """The BNR service provides APIs to run the
+    BNR NIM.
     """
 
     @staticmethod
@@ -96,7 +96,7 @@ class MaxineBNR(object):
         return grpc.experimental.stream_stream(
             request_iterator,
             target,
-            '/nvidia.maxine.bnr.v1.MaxineBNR/EnhanceAudio',
+            '/nvidia.ai4m.bnr.v1.BNR/EnhanceAudio',
             bnr__pb2.EnhanceAudioRequest.SerializeToString,
             bnr__pb2.EnhanceAudioResponse.FromString,
             options,

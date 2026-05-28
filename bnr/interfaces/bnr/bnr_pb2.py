@@ -24,19 +24,19 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tbnr.proto\x12\x14nvidia.maxine.bnr.v1\"F\n\x12\x45nhanceAudioConfig\x12\x1c\n\x0fintensity_ratio\x18\x01 \x01(\x02H\x00\x88\x01\x01\x42\x12\n\x10_intensity_ratio\"~\n\x13\x45nhanceAudioRequest\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x12:\n\x06\x63onfig\x18\x02 \x01(\x0b\x32(.nvidia.maxine.bnr.v1.EnhanceAudioConfigH\x00\x42\x0e\n\x0cstream_input\"\x80\x01\n\x14\x45nhanceAudioResponse\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x12:\n\x06\x63onfig\x18\x02 \x01(\x0b\x32(.nvidia.maxine.bnr.v1.EnhanceAudioConfigH\x00\x42\x0f\n\rstream_output2x\n\tMaxineBNR\x12k\n\x0c\x45nhanceAudio\x12).nvidia.maxine.bnr.v1.EnhanceAudioRequest\x1a*.nvidia.maxine.bnr.v1.EnhanceAudioResponse\"\x00(\x01\x30\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tbnr.proto\x12\x12nvidia.ai4m.bnr.v1\"F\n\x12\x45nhanceAudioConfig\x12\x1c\n\x0fintensity_ratio\x18\x01 \x01(\x02H\x00\x88\x01\x01\x42\x12\n\x10_intensity_ratio\"|\n\x13\x45nhanceAudioRequest\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x12\x38\n\x06\x63onfig\x18\x02 \x01(\x0b\x32&.nvidia.ai4m.bnr.v1.EnhanceAudioConfigH\x00\x42\x0e\n\x0cstream_input\"~\n\x14\x45nhanceAudioResponse\x12\x1b\n\x11\x61udio_stream_data\x18\x01 \x01(\x0cH\x00\x12\x38\n\x06\x63onfig\x18\x02 \x01(\x0b\x32&.nvidia.ai4m.bnr.v1.EnhanceAudioConfigH\x00\x42\x0f\n\rstream_output2n\n\x03\x42NR\x12g\n\x0c\x45nhanceAudio\x12\'.nvidia.ai4m.bnr.v1.EnhanceAudioRequest\x1a(.nvidia.ai4m.bnr.v1.EnhanceAudioResponse\"\x00(\x01\x30\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'bnr_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_ENHANCEAUDIOCONFIG']._serialized_start=35
-  _globals['_ENHANCEAUDIOCONFIG']._serialized_end=105
-  _globals['_ENHANCEAUDIOREQUEST']._serialized_start=107
-  _globals['_ENHANCEAUDIOREQUEST']._serialized_end=233
-  _globals['_ENHANCEAUDIORESPONSE']._serialized_start=236
-  _globals['_ENHANCEAUDIORESPONSE']._serialized_end=364
-  _globals['_MAXINEBNR']._serialized_start=366
-  _globals['_MAXINEBNR']._serialized_end=486
+  _globals['_ENHANCEAUDIOCONFIG']._serialized_start=33
+  _globals['_ENHANCEAUDIOCONFIG']._serialized_end=103
+  _globals['_ENHANCEAUDIOREQUEST']._serialized_start=105
+  _globals['_ENHANCEAUDIOREQUEST']._serialized_end=229
+  _globals['_ENHANCEAUDIORESPONSE']._serialized_start=231
+  _globals['_ENHANCEAUDIORESPONSE']._serialized_end=357
+  _globals['_BNR']._serialized_start=359
+  _globals['_BNR']._serialized_end=469
 # @@protoc_insertion_point(module_scope)

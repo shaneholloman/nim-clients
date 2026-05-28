@@ -22,14 +22,14 @@
 
 
 # This script compiles Protocol Buffer (protobuf) definitions for NVIDIA
-# Maxine Studio Voice on a Linux Client.
+# BNR on a Linux Client.
 #
 # Execute the script using `./compile_proto.sh`
 #
 # For more details, refer to README.md
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-PROTOS_DIR=$SCRIPT_DIR/proto/nvidia/maxine/bnr/v1
+PROTOS_DIR=$SCRIPT_DIR/proto/nvidia/ai4m/bnr/v1
 OUT_DIR=$SCRIPT_DIR/../interfaces/bnr
 
 python3 -m grpc_tools.protoc -I=$PROTOS_DIR \
